@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "481582585370",
+    "firebase_url": "https://acttendance-243e3.firebaseio.com",
+    "project_id": "acttendance-243e3",
+    "storage_bucket": "acttendance-243e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481582585370:android:a24b469255a63c28fda3a3",
+        "android_client_info": {
+          "package_name": "com.example.acctendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481582585370-5ggn8bnne2pqmda256pmi4r0djnvjvl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM0ZaTD9te25_mz96lSQOXHma3huROz04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481582585370-5ggn8bnne2pqmda256pmi4r0djnvjvl6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
