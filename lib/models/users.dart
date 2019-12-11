@@ -1,9 +1,10 @@
-class Users {
+class UserData {
 
-  final int idNumber;
+  final String uid;
+  final String idNumber;
   final String name;
   final String course;
 
-  Users({this.idNumber, this.name, this.course});
+  UserData({this.uid, this.idNumber, this.name, this.course, });
 
 }

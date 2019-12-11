@@ -1,9 +1,9 @@
-import 'package:acctendance/models/users.dart';
+import 'package:acctendance/models/user.dart';
+import 'package:acctendance/screens/pages/profile.dart';
 import 'package:acctendance/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:acctendance/services/database.dart';
 import 'package:provider/provider.dart';
-import 'package:acctendance/screens/home/users_list.dart';
 
 class Home extends StatelessWidget {
 
@@ -11,9 +11,35 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<Users>>.value(
+    return StreamProvider<List<User>>.value(
         value: DatabaseService().users,
         child: Scaffold(
+          drawer: Drawer(
+            child: ListView(
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    'Profile'
+                  ),
+                  trailing: Icon(Icons.person),
+                  onTap: (){
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
+                  },
+                ),
+                new Divider(),
+                ListTile(
+                  title: Text(
+                    'Cancel'
+                  ),
+                  trailing: Icon(Icons.cancel),
+                  onTap: (){
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
         backgroundColor: Colors.orange[50],
         appBar: AppBar(
           title: Text('Acttendance'),
@@ -30,7 +56,9 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: UserList(),
+        body: Center(
+          child: Text('Home'),
+        ),
       ),
     );
   }

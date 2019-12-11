@@ -21,11 +21,15 @@ class _RegisterState extends State<Register> {
   //text field state
   String email = '';
   String password = '';
+  String idNumber = '';
+  String name = '';
+  String course = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.orange[50],
       appBar: AppBar(
         backgroundColor: Colors.orange[300],
@@ -42,52 +46,79 @@ class _RegisterState extends State<Register> {
           )
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              TextFormField(
-                decoration: textInputDecoration,
-                validator: (val) => val.isEmpty ? 'Enter email' : null,
-                onChanged: (val){
-                  setState(()=> email = val);
-                }
-              ),
-              SizedBox(height: 20.0),
-              TextFormField(
-               decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                validator: (val) => val.length < 6 ? 'Enter password 6+ chars' : null,
-                obscureText: true,
-                onChanged: (val){
-                  setState(()=> password = val);
-                }
-              ),
-              SizedBox(height: 20.0
-              ),
-              RaisedButton(
-                color: Colors.pink,
-                child: Text('Register', 
-                  style: TextStyle(color: Colors.white)
+      body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textInputDecoration,
+                  validator: (val) => val.isEmpty ? 'Enter email' : null,
+                  onChanged: (val){
+                    setState(()=> email = val);
+                  }
                 ),
-                onPressed: () async{
-                  if(_formKey.currentState.validate()){
-                    dynamic result = await _auth.registerWithEmailandPassword(email, password);
-                    if(result == null){
-                      setState(() => error = 'enter valid email');
+                SizedBox(height: 20.0),
+                TextFormField(
+                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                  validator: (val) => val.length < 6 ? 'Enter password 6+ characters' : null,
+                  obscureText: true,
+                  onChanged: (val){
+                    setState(()=> password = val);
+                  }
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                 decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
+                  validator: (val) => val.length != 10 ? 'Id Number needs 11 digits' : null,
+                  onChanged: (val){
+                    setState(()=> idNumber = val);
+                  }
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                 decoration: textInputDecoration.copyWith(hintText: 'Name'),
+                  validator: (val) => val.isEmpty ? 'Enter Name' : null,
+                  onChanged: (val){
+                    setState(()=> name = val);
+                  }
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                 decoration: textInputDecoration.copyWith(hintText: 'College'),
+                  validator: (val) => val.isEmpty ? 'Enter College' : null,
+                  onChanged: (val){
+                    setState(()=> course = val);
+                  }
+                ),
+                SizedBox(height: 20.0
+                ),
+                RaisedButton(
+                  color: Colors.pink,
+                  child: Text('Register', 
+                    style: TextStyle(color: Colors.white)
+                  ),
+                  onPressed: () async{
+                    if(_formKey.currentState.validate()){
+                      dynamic result = await _auth.registerWithEmailandPassword(email, password, idNumber, name, course);
+                      if(result == null){
+                        setState(() => error = 'error something is wrong');
+                      }
                     }
                   }
-                }
-              ),
-              SizedBox(
-                height: 20.0
-              ),
-              Text(error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0),
-                )
-            ],
+                ),
+                SizedBox(
+                  height: 20.0
+                ),
+                Text(error,
+                  style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  )
+              ],
+            ),
           ),
         ),
       ),
