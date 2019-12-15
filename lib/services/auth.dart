@@ -1,6 +1,6 @@
 import 'package:acctendance/models/user.dart';
 import 'package:acctendance/services/database.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -8,7 +8,6 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create user obj based on FirebaseUser
-  // ignore: unused_element
   User _userFromFireBase(FirebaseUser user){
     return user != null ? User(uid: user.uid) : null;
   }
@@ -42,9 +41,7 @@ class AuthService {
       return null;
     }
   }
-
   
-
   //register with email and password
   Future registerWithEmailandPassword(String email, String password, String name, String idNumber, String course) async {
     try{
@@ -56,6 +53,22 @@ class AuthService {
       /*Firestore.instance.collection('users').document().setData({ 'userId': user.uid, 'email': email, 'password': password,
       'idNumber': '2015103251', 'name': 'Janrey Dumaog', 'course': 'BSIT'});*/
 
+      return _userFromFireBase(user);
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  //insert QRCode
+  Future insertQRCodeDataAuth(String qrcodedata) async {
+    try{
+      FirebaseUser user = await _auth.currentUser();
+
+      //await DatabaseService(uid: user.uid).insertQRCodeData(qrcodedata);
+
+      Firestore.instance.collection('qrcodes').document().setData({'uid': user.uid ,'qrcodedata': qrcodedata });
+      
       return _userFromFireBase(user);
     }catch(e){
       print(e.toString());

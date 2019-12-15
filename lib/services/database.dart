@@ -1,3 +1,4 @@
+import 'package:acctendance/models/qrcode.dart';
 import 'package:acctendance/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -9,6 +10,7 @@ class DatabaseService {
   //collection reference
   final CollectionReference user = Firestore.instance.collection('users');
 
+  final CollectionReference qrcodes = Firestore.instance.collection('qrcodes');
 
   //insert additional user data parameters
   Future insertUserData(String email, String password, String name, String idNumber, String course) async {
@@ -30,16 +32,31 @@ class DatabaseService {
     });
   }
 
+  //insert QRCodedata
+  Future insertQRCodeData(String qrcodedata) async {
+    return await qrcodes.document(uid).setData({
+      'qrcodedata' : qrcodedata,
+    });
+  }
+
 
 
   //users list from snapshot
-  // ignore: unused_element
   List<UserData> _usersListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return UserData(
         idNumber: doc.data['idNumber'] ?? '',
         name: doc.data['name'] ?? '',
         course: doc.data['course'] ?? '',
+      );
+    }).toList();
+  }
+
+  //users list from snapshot
+  List<QRcode> _qrcodesListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return QRcode(
+        qrcodedata: doc.data['qrcodedata'] ?? '',
       );
     }).toList();
   }
@@ -54,10 +71,24 @@ class DatabaseService {
     );
   }
 
+  //QRcode data from snapshot
+  QRcode _qrcodesDataFromSnapshot(DocumentSnapshot snapshot){
+    return QRcode(
+      //uid: uid,
+      qrcodedata: snapshot.data['qrcodedata'],
+    );
+  }
+
   //get user stream
   Stream<List<UserData>> get users {
     return user.snapshots()
       .map(_usersListFromSnapshot);
+  }
+
+   //get QRcode stream
+  Stream<List<QRcode>> get qr {
+    return qrcodes.snapshots()
+      .map(_qrcodesListFromSnapshot);
   }
   
   //get user doc stream
@@ -66,4 +97,9 @@ class DatabaseService {
       .map(_userDataFromSnapshot);
   }
 
+  //get QRcode doc stream
+  Stream<QRcode> get qrcodesdata{
+    return qrcodes.document(uid).snapshots()
+      .map(_qrcodesDataFromSnapshot);
+  }
 }

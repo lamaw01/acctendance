@@ -3,12 +3,12 @@ import 'package:acctendance/screens/home/users_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UserList extends StatefulWidget {
+class UsersList extends StatefulWidget {
   @override
-  _UserListState createState() => _UserListState();
+  _UsersListState createState() => _UsersListState();
 }
 
-class _UserListState extends State<UserList> {
+class _UsersListState extends State<UsersList> {
   @override
   Widget build(BuildContext context) {
 

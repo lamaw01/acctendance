@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
-        body: UserList(),
+        body: UsersList(),
       ),
     );
   }
