@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
   
   @override
   Widget build(BuildContext context){
-    return StreamProvider<List<User>>.value(
+    return StreamProvider<List<UserData>>.value(
         value: DatabaseService().users,
         child: Scaffold(
         backgroundColor: Colors.orange[50],

@@ -49,12 +49,12 @@ class _RegisterState extends State<Register> {
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20.0),
+                SizedBox(height: 5.0),
                 TextFormField(
                   decoration: textInputDecoration,
                   validator: (val) => val.isEmpty ? 'Enter email' : null,
@@ -62,7 +62,7 @@ class _RegisterState extends State<Register> {
                     setState(()=> email = val);
                   }
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 5.0),
                 TextFormField(
                  decoration: textInputDecoration.copyWith(hintText: 'Password'),
                   validator: (val) => val.length < 6 ? 'Enter password 6+ characters' : null,
@@ -71,15 +71,7 @@ class _RegisterState extends State<Register> {
                     setState(()=> password = val);
                   }
                 ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                 decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
-                  validator: (val) => val.length != 10 ? 'Id Number needs 11 digits' : null,
-                  onChanged: (val){
-                    setState(()=> idNumber = val);
-                  }
-                ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 5.0),
                 TextFormField(
                  decoration: textInputDecoration.copyWith(hintText: 'Name'),
                   validator: (val) => val.isEmpty ? 'Enter Name' : null,
@@ -87,7 +79,15 @@ class _RegisterState extends State<Register> {
                     setState(()=> name = val);
                   }
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 5.0),
+                TextFormField(
+                 decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
+                  validator: (val) => val.length != 10 ? 'Id Number needs 11 digits' : null,
+                  onChanged: (val){
+                    setState(()=> idNumber = val);
+                  }
+                ),
+                SizedBox(height: 5.0),
                 TextFormField(
                  decoration: textInputDecoration.copyWith(hintText: 'College'),
                   validator: (val) => val.isEmpty ? 'Enter College' : null,
@@ -95,7 +95,7 @@ class _RegisterState extends State<Register> {
                     setState(()=> course = val);
                   }
                 ),
-                SizedBox(height: 20.0
+                SizedBox(height: 5.0
                 ),
                 RaisedButton(
                   color: Colors.pink,
@@ -104,7 +104,7 @@ class _RegisterState extends State<Register> {
                   ),
                   onPressed: () async{
                     if(_formKey.currentState.validate()){
-                      dynamic result = await _auth.registerWithEmailandPassword(email, password, idNumber, name, course);
+                      dynamic result = await _auth.registerWithEmailandPassword(email, password, name, idNumber, course);
                       if(result == null){
                         setState(() => error = 'error something is wrong');
                       }
@@ -112,7 +112,7 @@ class _RegisterState extends State<Register> {
                   }
                 ),
                 SizedBox(
-                  height: 20.0
+                  height: 5.0
                 ),
                 Text(error,
                   style: TextStyle(color: Colors.red, fontSize: 14.0),

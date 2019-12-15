@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<User>>.value(
+    return StreamProvider<List<UserData>>.value(
         value: DatabaseService().users,
         child: Scaffold(
           drawer: Drawer(

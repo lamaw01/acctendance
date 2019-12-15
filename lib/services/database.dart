@@ -1,5 +1,4 @@
 import 'package:acctendance/models/user.dart';
-import 'package:acctendance/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -12,12 +11,12 @@ class DatabaseService {
 
 
   //insert additional user data parameters
-  Future insertUserData(String email, String password, String idNumber, String name, String course) async {
+  Future insertUserData(String email, String password, String name, String idNumber, String course) async {
     return await user.document(uid).setData({
       'email' : email,
       'password' : password,
-      'idNumber' : idNumber,
       'name' : name,
+      'idNumber' : idNumber,
       'course' : course,
     });
   }
@@ -35,9 +34,9 @@ class DatabaseService {
 
   //users list from snapshot
   // ignore: unused_element
-  List<User> _usersListFromSnapshot(QuerySnapshot snapshot){
+  List<UserData> _usersListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
-      return User(
+      return UserData(
         idNumber: doc.data['idNumber'] ?? '',
         name: doc.data['name'] ?? '',
         course: doc.data['course'] ?? '',
@@ -56,7 +55,7 @@ class DatabaseService {
   }
 
   //get user stream
-  Stream<List<User>> get users {
+  Stream<List<UserData>> get users {
     return user.snapshots()
       .map(_usersListFromSnapshot);
   }

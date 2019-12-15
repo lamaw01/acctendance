@@ -46,12 +46,12 @@ class AuthService {
   
 
   //register with email and password
-  Future registerWithEmailandPassword(String email, String password, String idNumber, String name, String course) async {
+  Future registerWithEmailandPassword(String email, String password, String name, String idNumber, String course) async {
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
 
-      await DatabaseService(uid: user.uid).insertUserData(email, password, idNumber, name, course);
+      await DatabaseService(uid: user.uid).insertUserData(email, password, name, idNumber, course);
       
       /*Firestore.instance.collection('users').document().setData({ 'userId': user.uid, 'email': email, 'password': password,
       'idNumber': '2015103251', 'name': 'Janrey Dumaog', 'course': 'BSIT'});*/

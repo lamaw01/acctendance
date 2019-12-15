@@ -8,13 +8,11 @@ class UserList extends StatefulWidget {
   _UserListState createState() => _UserListState();
 }
 
-
-
 class _UserListState extends State<UserList> {
   @override
   Widget build(BuildContext context) {
 
-    final users = Provider.of<User>(context);
+    final users = Provider.of<User>(context) ?? [];
     final int userCount = 1;
 
     /*users.forEach((users){
