@@ -22,13 +22,15 @@ class _QRcodeListState extends State<QRcodeList> {
         stream: getUsersTripsStreamSnapshots(context),
         builder: (context, snapshot) {
           if(snapshot.data == null){
-            return CircularProgressIndicator();
+            return Loading();
           }
           return ListView.builder(
             itemCount: snapshot.data.documents.length,
             itemBuilder: (BuildContext context, int index) =>
-              buildTripCard(context, snapshot.data.documents[index]));
-        });
+              buildTripCard(context, snapshot.data.documents[index])
+          );
+        }
+      );
     }catch(e){
       return Loading();
     }
@@ -49,4 +51,5 @@ class _QRcodeListState extends State<QRcodeList> {
       ),
     );
   }
+  
 }

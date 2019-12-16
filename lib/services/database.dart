@@ -2,7 +2,6 @@ import 'package:acctendance/models/qrcode.dart';
 import 'package:acctendance/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class DatabaseService {
 
   final String uid;
@@ -10,16 +9,13 @@ class DatabaseService {
 
   //collection reference
   final CollectionReference user = Firestore.instance.collection('users');
-
   final CollectionReference qrcodes = Firestore.instance.collection('qrcodes');
 
   //insert additional user data parameters
-  Future insertUserData(String email, String password, String name, String idNumber, String course) async {
+  Future insertUserData(String idNumber, String name, String course) async {
     return await user.document(uid).setData({
-      'email' : email,
-      'password' : password,
-      'name' : name,
       'idNumber' : idNumber,
+      'name' : name,
       'course' : course,
     });
   }

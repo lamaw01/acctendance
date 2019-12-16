@@ -1,7 +1,6 @@
 import 'package:acctendance/screens/home/qrcodes_list.dart';
 import 'package:flutter/material.dart';
 
-
 class ActivitiesPage extends StatefulWidget {
   
   @override
@@ -16,7 +15,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
         backgroundColor: Colors.orange[50],
         appBar: AppBar(
           title: Text('Activities'),
-          backgroundColor: Colors.orange[300],
+          backgroundColor: Colors.brown[400],
           elevation: 0.0,
         ),
         body: QRcodeList(),

@@ -22,19 +22,20 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String error = '';
-  
 
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.orange[50],
       appBar: AppBar(
-        backgroundColor: Colors.orange[300],
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.brown[400],
         elevation: 0.0,
         title: Text('Sign in'),
         actions: <Widget>[
           FlatButton.icon(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.arrow_forward_ios),
             label: Text('Register'),
             textColor: Colors.white,
             onPressed: (){
@@ -44,34 +45,33 @@ class _SignInState extends State<SignIn> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
-              SizedBox(height: 5.0),
+              SizedBox(height: 10.0),
               TextFormField(
                 decoration: textInputDecoration,
                 validator: (val) => val.isEmpty ? 'Enter email' : null,
                 onChanged: (val){
-                  setState(()=> email = val);
+                  setState(()=> email = val.trim());
                 }
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: 10.0),
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                validator: (val) => val.length < 6 ? 'Enter password 6+ chars' : null,
+                validator: (val) => val.length < 7 ? 'Enter password 6+ chars' : null,
                 obscureText: true,
                 onChanged: (val){
                   setState(()=> password = val);
                 }
               ),
-              SizedBox(height: 5.0
-              ),
+              SizedBox(height: 10.0),
               RaisedButton(
-                color: Colors.orange[400],
+                color: Colors.green[300],
                 child: Text('Sign in', 
-                  style: TextStyle(color: Colors.white)
+                  style: TextStyle(color: Colors.white, fontSize: 18.0)
                 ),
                 onPressed: () async{
                   if(_formKey.currentState.validate()){
@@ -84,12 +84,10 @@ class _SignInState extends State<SignIn> {
                   }
                 }
               ),
-              SizedBox(
-                height: 5.0
-              ),
+              SizedBox(height: 10.0),
               Text(error,
                 style: TextStyle(color: Colors.red, fontSize: 14.0),
-                )
+              )
             ],
           ),
         ),
