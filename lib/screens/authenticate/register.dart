@@ -82,7 +82,7 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 5.0),
                 TextFormField(
                  decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
-                  validator: (val) => val.length != 10 ? 'Id Number needs 11 digits' : null,
+                  validator: (val) => val.length != 10 ? 'Id Number needs 10 digits' : null,
                   onChanged: (val){
                     setState(()=> idNumber = val);
                   }

@@ -125,10 +125,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(color: Colors.white)
                   ),
                   onPressed: () async{
-                    dynamic output = await _auth.insertQRCodeDataAuth(result);
-                    if(output == null){
-                        print("error");
-                      }
+                    await _auth.insertQRCodeDataAuth(result);
                     print(result);
                   }
                 ),

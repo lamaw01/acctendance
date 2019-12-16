@@ -1,9 +1,15 @@
 import 'package:acctendance/models/user.dart';
-import 'package:acctendance/screens/home/users_tile.dart';
+import 'package:acctendance/services/database.dart';
+import 'package:acctendance/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class UsersList extends StatefulWidget {
+
+  final User users;
+  UsersList({this.users});
+
+
   @override
   _UsersListState createState() => _UsersListState();
 }
@@ -12,20 +18,45 @@ class _UsersListState extends State<UsersList> {
   @override
   Widget build(BuildContext context) {
 
-    final users = Provider.of<User>(context) ?? [];
     final int userCount = 1;
-
-    /*users.forEach((users){
-      print(users.idNumber);
-      print(users.name);
-      print(users.course);
-    });*/
 
     return ListView.builder(
       itemCount: userCount,
       itemBuilder: (context, index){
-        return  UsersTile(users: users);
+        return  userTile(context);
       },
+    );
+  }
+
+  Widget userTile(BuildContext context){
+
+    final user = Provider.of<User>(context);
+
+    return StreamBuilder<UserData>(
+      stream: DatabaseService(uid: user.uid).userData,
+      builder: (context, snapshot) {
+        if(snapshot.hasData){
+          UserData userData = snapshot.data;
+          return Padding(
+                padding: EdgeInsets.only(top: 0.0),
+                child: Card(
+                  child: ListTile(
+                    leading:CircleAvatar(
+                      radius: 25.0,
+                      backgroundColor: Colors.black,
+                      child: Text("${userData.course}"),
+                    ),
+                    title: Text("${userData.name}"),
+                    subtitle: Text('${userData.idNumber}'),
+                    //trailing: Text('${users.course}'),
+                  ),
+                ),
+              );
+        }
+        else{
+          return Loading();
+        }
+      }
     );
   }
 }

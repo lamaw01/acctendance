@@ -2,6 +2,7 @@ import 'package:acctendance/models/qrcode.dart';
 import 'package:acctendance/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class DatabaseService {
 
   final String uid;
@@ -39,8 +40,6 @@ class DatabaseService {
     });
   }
 
-
-
   //users list from snapshot
   List<UserData> _usersListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
@@ -56,7 +55,7 @@ class DatabaseService {
   List<QRcode> _qrcodesListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return QRcode(
-        qrcodedata: doc.data['qrcodedata'] ?? '',
+        qrcodedata: doc.data['qrcode'] ?? '',
       );
     }).toList();
   }
@@ -75,7 +74,7 @@ class DatabaseService {
   QRcode _qrcodesDataFromSnapshot(DocumentSnapshot snapshot){
     return QRcode(
       //uid: uid,
-      qrcodedata: snapshot.data['qrcodedata'],
+      qrcodedata: snapshot.data['qrcode'],
     );
   }
 
@@ -102,4 +101,6 @@ class DatabaseService {
     return qrcodes.document(uid).snapshots()
       .map(_qrcodesDataFromSnapshot);
   }
+
+
 }

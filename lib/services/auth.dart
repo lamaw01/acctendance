@@ -67,15 +67,16 @@ class AuthService {
 
       //await DatabaseService(uid: user.uid).insertQRCodeData(qrcodedata);
 
-      Firestore.instance.collection('qrcodes').document().setData({'uid': user.uid ,'qrcodedata': qrcodedata });
+      //Firestore.instance.collection('qrcode').document().setData({'uid': user.uid ,'qrcodedata': qrcodedata });
+
+      Firestore.instance.collection("qrcodes").document(user.uid).collection("qrdata")
+        .document().setData({'qrcodedata': qrcodedata });
       
-      return _userFromFireBase(user);
     }catch(e){
       print(e.toString());
       return null;
     }
   }
-
 
   //sign out
   Future signOut() async {
@@ -85,5 +86,10 @@ class AuthService {
       print(e.toString());
       return null;
     }
+  }
+  
+   // GET UID
+  Future<String> getCurrentUID() async {
+    return (await _auth.currentUser()).uid;
   }
 }
