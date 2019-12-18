@@ -30,9 +30,10 @@ class DatabaseService {
   }
 
   //insert QRCodedata
-  Future insertQRCodeData(String qrcodedata) async {
+  Future insertQRCodeData(String qrcodedata, String signature) async {
     return await qrcodes.document(uid).setData({
       'qrcodedata' : qrcodedata,
+      'signature' : signature
     });
   }
 
@@ -52,6 +53,7 @@ class DatabaseService {
     return snapshot.documents.map((doc){
       return QRcode(
         qrcodedata: doc.data['qrcode'] ?? '',
+        signature: doc.data['signature'] ?? '',
       );
     }).toList();
   }
@@ -71,6 +73,7 @@ class DatabaseService {
     return QRcode(
       //uid: uid,
       qrcodedata: snapshot.data['qrcode'],
+      signature: snapshot.data['signature'],
     );
   }
 

@@ -1,7 +1,8 @@
 class QRcode {
   
   final String qrcodedata;
+  final String signature;
 
-  QRcode({this.qrcodedata});
+  QRcode({this.qrcodedata, this.signature});
 
 }

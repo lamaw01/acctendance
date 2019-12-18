@@ -61,7 +61,7 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 10.0),
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                validator: (val) => val.length < 7 ? 'Enter password 6+ chars' : null,
+                validator: (val) => val.length < 7 ? 'Enter password 6+ characters' : null,
                 obscureText: true,
                 onChanged: (val){
                   setState(()=> password = val);

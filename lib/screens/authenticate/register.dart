@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 10.0),
                 TextFormField(
                  decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
-                  validator: (val) => val.length != 10 ? 'Id Number needs 10 digits' : null,
+                  validator: (val) => val.length != 10 ? 'Id number needs 10 digits' : null,
                   onChanged: (val){
                     setState(()=> idNumber = val);
                   }
@@ -83,7 +83,7 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 10.0),  
                 TextFormField(
                  decoration: textInputDecoration.copyWith(hintText: 'Name'),
-                  validator: (val) => val.isEmpty ? 'Enter Name' : null,
+                  validator: (val) => val.isEmpty ? 'Enter name' : null,
                   onChanged: (val){
                     setState(()=> name = val);
                   }
@@ -91,7 +91,7 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 10.0),
                 TextFormField(
                  decoration: textInputDecoration.copyWith(hintText: 'College'),
-                  validator: (val) => val.isEmpty ? 'Enter College' : null,
+                  validator: (val) => val.isEmpty ? 'Enter college' : null,
                   onChanged: (val){
                     setState(()=> course = val);
                   }

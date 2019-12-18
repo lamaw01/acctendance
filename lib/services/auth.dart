@@ -58,12 +58,12 @@ class AuthService {
   }
 
   //insert QRCode
-  Future insertQRCodeDataAuth(String qrcodedata) async {
+  Future insertQRCodeDataAuth(String qrcodedata, String signature) async {
     try{
       FirebaseUser user = await _auth.currentUser();
 
       Firestore.instance.collection("qrcodes").document(user.uid).collection("qrdata")
-        .document().setData({'qrcodedata': qrcodedata });
+        .document().setData({'qrcodedata': qrcodedata, 'signature': signature});
       
     }catch(e){
       print(e.toString());
