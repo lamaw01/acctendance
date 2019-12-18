@@ -1,9 +1,5 @@
-
-//import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-//import 'package:firebase_storage/firebase_storage.dart';
-//import 'package:acctendance/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_signature_pad/flutter_signature_pad.dart';
@@ -63,8 +59,9 @@ class _DrawState extends State<Draw> {
                   color: Colors.white,
                   key: _sign,
                   onSign: () {
+                    // ignore: unused_local_variable
                     final sign = _sign.currentState;
-                    debugPrint('${sign.points.length} points in the signature');
+                    //print('${sign.points.length} points in the signature');
                   },
                   backgroundPainter: _WatermarkPaint("2.0", "2.0"),
                   strokeWidth: 2,
@@ -145,7 +142,7 @@ class _DrawState extends State<Draw> {
                           setState(() {
                             _img = ByteData(0);
                           });
-                          print("cleared");
+                          //print("cleared");
                         },
                         child: Text("Clear",
                           style: TextStyle(color: Colors.white, fontSize: 16.0),

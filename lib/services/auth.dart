@@ -25,7 +25,7 @@ class AuthService {
       FirebaseUser user = result.user;
       return user;
     }catch(e){
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }
@@ -37,7 +37,7 @@ class AuthService {
       FirebaseUser user = result.user;
       return _userFromFireBase(user);
     }catch(e){
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }
@@ -52,7 +52,7 @@ class AuthService {
 
       return _userFromFireBase(user);
     }catch(e){
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }
@@ -66,7 +66,7 @@ class AuthService {
         .document().setData({'qrcodedata': qrcodedata, 'signature': signature});
       
     }catch(e){
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }
@@ -76,7 +76,7 @@ class AuthService {
     try{
       return await _auth.signOut();
     }catch(e){
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }

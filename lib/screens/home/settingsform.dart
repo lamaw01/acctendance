@@ -30,51 +30,54 @@ class _SettingsFormState extends State<SettingsForm> {
 
           UserData userData = snapshot.data;
 
-          return Container(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 10.0),
-                  TextFormField(
-                    initialValue: userData.idNumber,
-                    decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
-                    validator: (val) => val.length != 10 ? 'Id number needs 10 digits' : null,
-                    onChanged: (val) => setState(() => _currentIdNumber = val ),
-                  ),
-                  SizedBox(height: 10.0),
-                  TextFormField(
-                    initialValue: userData.name,
-                    decoration: textInputDecoration.copyWith(hintText: 'Name'),
-                    validator: (val) => val.isEmpty ? 'Enter name' : null,
-                    onChanged: (val) => setState(() => _currentName = val ),
-                  ),
-                  SizedBox(height: 10.0),
-                  TextFormField(
-                    initialValue: userData.course,
-                    decoration: textInputDecoration.copyWith(hintText: 'Course'),
-                    validator: (val) => val.length > 6 ? 'Enter 6 characters' : null,
-                    onChanged: (val) => setState(() => _currentCourse = val ),
-                  ),
-                  SizedBox(height: 10.0),
-                  RaisedButton(
-                    color: Colors.green[300],
-                    child: Text('Update',
-                      style: TextStyle(color: Colors.white, fontSize: 18.0),
+          return SingleChildScrollView (
+              scrollDirection: Axis.vertical,
+              child: Container(
+              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      initialValue: userData.idNumber,
+                      decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
+                      validator: (val) => val.length != 10 ? 'Id number needs 10 digits' : null,
+                      onChanged: (val) => setState(() => _currentIdNumber = val ),
                     ),
-                    onPressed: () async {
-                      if(_formKey.currentState.validate()){
-                        await DatabaseService(uid: user.uid).updateUserData(
-                          _currentIdNumber ?? userData.idNumber,
-                          _currentName ?? userData.name, 
-                          _currentCourse ?? userData.course,
-                        );
-                        Navigator.pop(context);
-                      }
-                    },
-                  ),
-                ],
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      initialValue: userData.name,
+                      decoration: textInputDecoration.copyWith(hintText: 'Name'),
+                      validator: (val) => val.isEmpty ? 'Enter name' : null,
+                      onChanged: (val) => setState(() => _currentName = val ),
+                    ),
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      initialValue: userData.course,
+                      decoration: textInputDecoration.copyWith(hintText: 'Course'),
+                      validator: (val) => val.length > 6 ? 'Enter 6 characters' : null,
+                      onChanged: (val) => setState(() => _currentCourse = val ),
+                    ),
+                    SizedBox(height: 10.0),
+                    RaisedButton(
+                      color: Colors.green[300],
+                      child: Text('Update',
+                        style: TextStyle(color: Colors.white, fontSize: 18.0),
+                      ),
+                      onPressed: () async {
+                        if(_formKey.currentState.validate()){
+                          await DatabaseService(uid: user.uid).updateUserData(
+                            _currentIdNumber ?? userData.idNumber,
+                            _currentName ?? userData.name, 
+                            _currentCourse ?? userData.course,
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );

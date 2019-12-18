@@ -50,7 +50,7 @@ class _RegisterState extends State<Register> {
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
           child: Form(
             key: _formKey,
             child: Column(
@@ -74,7 +74,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 10.0),
                 TextFormField(
-                 decoration: textInputDecoration.copyWith(hintText: 'Id Number'),
+                 decoration: textInputDecoration.copyWith(hintText: 'Id number'),
                   validator: (val) => val.length != 10 ? 'Id number needs 10 digits' : null,
                   onChanged: (val){
                     setState(()=> idNumber = val);

@@ -184,7 +184,7 @@ class _HomeState extends State<Home> {
                                 StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
                                 await firebaseStorageRef.getDownloadURL();
                                 var imageUrl = await firebaseStorageRef.getDownloadURL() as String;
-                                print('$imageUrl');
+                                //print('$imageUrl');
                                 if(result.isEmpty && imageUrl == null){
                                   error = 'Incomplete data';
                                   setState(() => error);
@@ -212,9 +212,9 @@ class _HomeState extends State<Home> {
                                     setState(() => error);
                                   }
                                 }
-                                print(result);  
+                                //print(result);  
                               }catch(e){
-                                print(e.toString());
+                                //print(e.toString());
                               }                             
                             }
                           ),

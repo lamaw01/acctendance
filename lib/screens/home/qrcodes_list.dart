@@ -37,42 +37,46 @@ class _QRcodeListState extends State<QRcodeList> {
   }
 
   Widget buildTripCard(BuildContext context, DocumentSnapshot qrdata) {
-    return Container(
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 40.0,
-                    width: 300.0,
-                    child: Text(
-                      qrdata['qrcodedata'],
-                      textAlign: TextAlign.center,
-                      
-                      style: TextStyle(fontSize: 16.0),
+    try{
+      return Container(
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      height: 40.0,
+                      width: 300.0,
+                      child: Text(
+                        qrdata['qrcodedata'],
+                        textAlign: TextAlign.center,      
+                        style: TextStyle(fontSize: 16.0),
+                      ),
                     ),
-                  ),
-                  Container(  
-                    height: 140.0,
-                    width: 300.0,
-                    child: Image.network(qrdata['signature'],
-                      scale: 0.1,
-                      color: Colors.black,
-                      width: 140.0, height: 140.0,
+                    Container(  
+                      height: 140.0,
+                      width: 300.0,
+                      child: Image.network(qrdata['signature'],
+                        scale: 0.1,
+                        color: Colors.black,
+                        width: 140.0, height: 140.0,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-          ]
-          ),     
+                  ],
+                ),
+            ]
+            ),     
+          ),
         ),
-      ),
     );
+    }catch(e){
+      //print(e.toString());
+      return Container();
+    }
   }
   
 }
