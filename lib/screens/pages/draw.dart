@@ -135,7 +135,7 @@ class _DrawState extends State<Draw> {
                         )
                     ),
                     RaisedButton(
-                        color: Colors.brown[300],
+                        color: Colors.red[300],
                         onPressed: () {
                           final sign = _sign.currentState;
                           sign.clear();

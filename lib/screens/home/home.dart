@@ -127,9 +127,8 @@ class _HomeState extends State<Home> {
               backgroundColor: Colors.brown[400],
               elevation: 0.0,
               actions: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(Icons.clear),
-                  label: Text('Clear'),
+                FlatButton(
+                  child: Text('Clear'),
                   textColor: Colors.white,
                   onPressed: (){
                     setState(() {

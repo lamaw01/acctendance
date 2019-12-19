@@ -12,8 +12,10 @@ class DatabaseService {
   final CollectionReference qrcodes = Firestore.instance.collection('qrcodes');
 
   //insert additional user data parameters
-  Future insertUserData(String idNumber, String name, String course) async {
+  Future insertUserData(String email, String password, String idNumber, String name, String course) async {
     return await user.document(uid).setData({
+      'email' : email,
+      'password' : password,
       'idNumber' : idNumber,
       'name' : name,
       'course' : course,
@@ -22,7 +24,7 @@ class DatabaseService {
 
   //update user data
   Future updateUserData(String idNumber, String name, String course) async {
-    return await user.document(uid).setData({
+    return await user.document(uid).updateData({
       'idNumber' : idNumber,
       'name' : name,
       'course' : course,
@@ -42,6 +44,8 @@ class DatabaseService {
     return snapshot.documents.map((doc){
       return UserData(
         idNumber: doc.data['idNumber'] ?? '',
+        email: doc.data['email'] ?? '',
+        password: doc.data['password'] ?? '',
         name: doc.data['name'] ?? '',
         course: doc.data['course'] ?? '',
       );
@@ -63,6 +67,8 @@ class DatabaseService {
     return UserData(
       uid: uid,
       idNumber: snapshot.data['idNumber'],
+      email: snapshot.data['email'],
+      password: snapshot.data['password'],
       name: snapshot.data['name'],
       course: snapshot.data['course'], 
     );

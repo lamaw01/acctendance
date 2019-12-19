@@ -57,7 +57,7 @@ class _RegisterState extends State<Register> {
               children: <Widget>[
                 SizedBox(height: 10.0),
                 TextFormField(
-                  decoration: textInputDecoration,
+                  decoration: textInputDecoration.copyWith(hintText: 'Email').copyWith(labelText: 'Email'),
                   validator: (val) => val.isEmpty ? 'Enter email' : null,
                   onChanged: (val){
                     setState(()=> email = val.trim());
@@ -65,7 +65,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 10.0),
                 TextFormField(
-                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                  decoration: textInputDecoration.copyWith(hintText: 'Password').copyWith(labelText: 'Password'),
                   validator: (val) => val.length < 7 ? 'Enter password 6+ characters' : null,
                   obscureText: true,
                   onChanged: (val){
@@ -74,7 +74,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 10.0),
                 TextFormField(
-                 decoration: textInputDecoration.copyWith(hintText: 'Id number'),
+                  decoration: textInputDecoration.copyWith(hintText: 'Id number').copyWith(labelText: 'Id number'),
                   validator: (val) => val.length != 10 ? 'Id number needs 10 digits' : null,
                   onChanged: (val){
                     setState(()=> idNumber = val);
@@ -82,7 +82,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 10.0),  
                 TextFormField(
-                 decoration: textInputDecoration.copyWith(hintText: 'Name'),
+                  decoration: textInputDecoration.copyWith(hintText: 'Name').copyWith(labelText: 'Name'),
                   validator: (val) => val.isEmpty ? 'Enter name' : null,
                   onChanged: (val){
                     setState(()=> name = val);
@@ -90,7 +90,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 10.0),
                 TextFormField(
-                 decoration: textInputDecoration.copyWith(hintText: 'College'),
+                  decoration: textInputDecoration.copyWith(hintText: 'College').copyWith(labelText: 'College'),
                   validator: (val) => val.isEmpty ? 'Enter college' : null,
                   onChanged: (val){
                     setState(()=> course = val);

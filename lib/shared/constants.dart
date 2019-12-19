@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 const textInputDecoration = InputDecoration(
+  labelText: 'Email',
   isDense: true,
   fillColor: Colors.white,
   filled: true,
-  hintText: 'Email',
+  hintText: '',
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(color: Colors.white, width: 2.0)
   ),
