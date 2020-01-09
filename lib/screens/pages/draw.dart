@@ -43,10 +43,20 @@ class _DrawState extends State<Draw> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[50],
+      backgroundColor: Colors.orange[100],
         appBar: AppBar(
           title: Text('Signature'),
-          backgroundColor: Colors.brown[400],
+          flexibleSpace: Container(
+              decoration: BoxDecoration(
+              gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Color.fromARGB(150, 202, 103, 1),
+              Colors.orange[200]
+                ])          
+              ),        
+            ),
           elevation: 0.0,
         ),
       body: Column(
@@ -78,7 +88,7 @@ class _DrawState extends State<Draw> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     RaisedButton(
-                        color: Colors.green[300],
+                        color: Colors.orange[700],
                         onPressed: () async {
                           final sign = _sign.currentState;
                           //retrieve image data, do whatever you want with it (send to server, save locally...)
@@ -135,7 +145,7 @@ class _DrawState extends State<Draw> {
                         )
                     ),
                     RaisedButton(
-                        color: Colors.red[300],
+                        color: Colors.purple[500],
                         onPressed: () {
                           final sign = _sign.currentState;
                           sign.clear();

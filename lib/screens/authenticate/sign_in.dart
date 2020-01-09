@@ -37,70 +37,82 @@ class _SignInState extends State<SignIn> {
               ),  
             ),   
             padding: EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 10.0),
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'Email').copyWith(labelText: 'Email'),
-                    validator: (val) => val.isEmpty ? 'Enter email' : null,
-                    onChanged: (val){
-                      setState(()=> email = val.trim());
-                    }
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    'Activity \n Attendance',
+                    style: TextStyle(fontFamily: 'YouthTouchDemoRegular-4VwY',fontSize: 77.0, color: Colors.white),
                   ),
-                  SizedBox(height: 10.0),
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'Password').copyWith(labelText: 'Password'),
-                    validator: (val) => val.length < 7 ? 'Enter password 6+ characters' : null,
-                    obscureText: true,
-                    onChanged: (val){ 
-                      setState(()=> password = val);
-                    }
-                  ),
-                  SizedBox(height: 10.0),
-                  SizedBox( 
-                    width: 300.0,
-                    height: 46.0,
-                    child: OutlineButton(
-                    borderSide: BorderSide(color: Colors.orange,width: 3),
-                    shape: RoundedRectangleBorder(side: BorderSide(
-                    color: Colors.white,
-                    style: BorderStyle.solid
-                    ), borderRadius: BorderRadius.circular(14.0)),
-                    child: Text('Sign in', 
-                      style: TextStyle(color: Colors.white, fontSize: 18.0,)
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      decoration: textInputDecoration.copyWith(hintText: 'Email').copyWith(labelText: 'Email'),
+                      validator: (val) => val.isEmpty ? 'Enter email' : null,
+                      onChanged: (val){
+                        setState(()=> email = val.trim());
+                      }
                     ),
-                    onPressed: () async{
-                      if(_formKey.currentState.validate()){
-                        setState(() => loading = true);
-                        dynamic result = await _auth.signInWithEmailandPassword(email, password);
-                        if(result == null){
-                          error = 'error something is wrong';
-                          setState(() => loading = false);
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      decoration: textInputDecoration.copyWith(hintText: 'Password').copyWith(labelText: 'Password'),
+                      validator: (val) => val.length < 7 ? 'Enter password 6+ characters' : null,
+                      obscureText: true,
+                      onChanged: (val){ 
+                        setState(()=> password = val);
+                      }
+                    ),
+                    SizedBox(height: 10.0),
+                    SizedBox( 
+                      width: 300.0,
+                      height: 46.0,
+                      child: OutlineButton(
+                      borderSide: BorderSide(color: Colors.orange,width: 3),
+                      shape: RoundedRectangleBorder(side: BorderSide(
+                      color: Colors.white,
+                      style: BorderStyle.solid
+                      ), borderRadius: BorderRadius.circular(14.0)),
+                      child: Text('Sign in', 
+                        style: TextStyle(color: Colors.white, fontSize: 18.0,)
+                      ),
+                      onPressed: () async{
+                        if(_formKey.currentState.validate()){
+                          setState(() => loading = true);
+                          dynamic result = await _auth.signInWithEmailandPassword(email, password);
+                          if(result == null){
+                            error = 'error something is wrong';
+                            setState(() => loading = false);
+                          }
                         }
                       }
-                    }
-                  ),
-                  ),
-                  
-                  
-                  FlatButton(
-                    child: Text('Register', 
-                      style: TextStyle(color: Colors.white, fontSize: 16.0)
                     ),
-                    onPressed: () {
-                      widget.toggleView();
-                    }
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(error,
-                    style: TextStyle(color: Colors.red, fontSize: 14.0),  
-                  )
-                ],
+                    ),
+                    
+                    
+                    FlatButton(
+                      child: Text('Register', 
+                        style: TextStyle(color: Colors.white, fontSize: 16.0)
+                      ),
+                      onPressed: () {
+                        widget.toggleView();
+                      }
+                    ),
+                    SizedBox(height: 10.0),
+                    Text(error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),  
+                    )
+                  ],
+                ),
               ),
+              ],
             ),
+           
        ),
     );
   }

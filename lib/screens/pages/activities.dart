@@ -15,7 +15,17 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
         backgroundColor: Colors.orange[50],
         appBar: AppBar(
           title: Text('Activities'),
-          backgroundColor: Colors.brown[400],
+          flexibleSpace: Container(
+              decoration: BoxDecoration(
+              gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Color.fromARGB(150, 202, 103, 1),
+              Colors.orange[200]
+                ])          
+              ),        
+            ),
           elevation: 0.0,
         ),
         body: QRcodeList(),

@@ -124,7 +124,17 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.orange[50],
             appBar: AppBar(       
               title: Text('Home'),
-              backgroundColor: Colors.brown[400],
+              flexibleSpace: Container(
+              decoration: BoxDecoration(
+              gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Color.fromARGB(150, 202, 103, 1),
+              Colors.orange[200]
+                ])          
+              ),        
+            ),
               elevation: 0.0,
               actions: <Widget>[
                 FlatButton(
@@ -153,6 +163,9 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Text(error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
+                    ),
                     Container(
                       color: Colors.black26,
                       width: 200.0,
@@ -173,12 +186,14 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10.0),
+                    SizedBox(height: 1.0),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Expanded(
+                        SizedBox(
+                            width: 220,
                             child: RaisedButton(
-                            color: Colors.orange[300],
+                            color: Colors.orange[500],
                             child: Text('Upload', 
                               style: TextStyle(color: Colors.white, fontSize: 18.0)
                             ),
@@ -228,41 +243,42 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(height: 5.0),
-                        RaisedButton(
-                          color: Colors.red[300],
-                          child: Text('Get Signature', 
-                            style: TextStyle(color: Colors.white, fontSize: 18.0)
+                        SizedBox(
+                            width: 220,
+                            child: RaisedButton(
+                            color: Colors.orange[400],
+                            child: Text('Get Signature', 
+                              style: TextStyle(color: Colors.white, fontSize: 18.0)
+                            ),
+                            onPressed: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Draw()));
+                            },
                           ),
-                          onPressed: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Draw()));
-                          },
                         ),
-                        SizedBox(height: 5.0),
-                        RaisedButton(
-                          color: Colors.blue[300],
-                          child: Text('Upload Sigature', 
-                            style: TextStyle(color: Colors.white, fontSize: 18.0)
+                        SizedBox(
+                            width: 220,
+                            child: RaisedButton(
+                            color: Colors.orange[300],
+                            child: Text('Upload Sigature', 
+                              style: TextStyle(color: Colors.white, fontSize: 18.0)
+                            ),
+                            onPressed: (){
+                              getImage();
+                            },
                           ),
-                          onPressed: (){
-                            getImage();
-                          },
                         ),
                       ],
                     ),                  
-                    SizedBox(height: 5.0),
-                    Text(error,
-                      style: TextStyle(color: Colors.red, fontSize: 14.0),
-                    )
+                    
                   ],
                 ),
               ),
             floatingActionButton: FloatingActionButton.extended(
               icon: Icon(Icons.camera_alt),
-              label: Text('Scan', 
+              label: Text('Scan',
                 style: TextStyle(color: Colors.white, fontSize: 18.0)
               ),
               onPressed: _scanQR,
