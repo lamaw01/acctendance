@@ -31,29 +31,21 @@ class _RegisterState extends State<Register> {
     return loading ? Loading() : Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.orange[50],
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        title: Text('Register'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.arrow_back_ios),
-            label: Text('Sign in'),
-            textColor: Colors.white,
-            onPressed: (){
-              widget.toggleView();
-            },
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
+      body: Container(
+        decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  'assets/bg.png'
+                ),
+                fit: BoxFit.cover,
+              ),  
+            ),
           child: Container(
           padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
           child: Form(
             key: _formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(height: 10.0),
                 TextFormField(
@@ -96,14 +88,20 @@ class _RegisterState extends State<Register> {
                     setState(()=> course = val);
                   }
                 ),
-                SizedBox(height: 10.0
-                ),
-                RaisedButton(
-                  color: Colors.green[300],
-                  child: Text('Register', 
-                    style: TextStyle(color: Colors.white, fontSize: 18.0)
-                  ),
-                  onPressed: () async{
+                SizedBox(height: 10.0),
+                SizedBox( 
+                    width: 322.0,
+                    height: 46.0,
+                    child: OutlineButton(
+                    borderSide: BorderSide(color: Colors.deepPurple,width: 3),
+                    shape: RoundedRectangleBorder(side: BorderSide(
+                    color: Colors.white,
+                    style: BorderStyle.solid
+                    ), borderRadius: BorderRadius.circular(14.0)),
+                    child: Text('Register', 
+                      style: TextStyle(color: Colors.white, fontSize: 18.0,)
+                    ),
+                    onPressed: () async{
                     if(_formKey.currentState.validate()){
                       dynamic result = await _auth.registerWithEmailandPassword(email, password, idNumber, name,  course);
                       if(result == null){
@@ -112,9 +110,21 @@ class _RegisterState extends State<Register> {
                     }
                   }
                 ),
+              ),
+ 
+                FlatButton(
+                    child: Text('Sign in', 
+                      style: TextStyle(color: Colors.white, fontSize: 16.0)
+                    ),
+                    onPressed: () {
+                      widget.toggleView();
+                    }
+                  ),
+
                 SizedBox(height: 10.0),
                 Text(error,
                   style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  
                 )
               ],
             ),

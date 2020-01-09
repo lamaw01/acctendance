@@ -27,71 +27,81 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.orange[50],
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        title: Text('Sign in'),
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.arrow_forward_ios),
-            label: Text('Register'),
-            textColor: Colors.white,
-            onPressed: (){
-              widget.toggleView();
-            },
-          )
-        ],
-      ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 10.0),
-              TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'Email').copyWith(labelText: 'Email'),
-                validator: (val) => val.isEmpty ? 'Enter email' : null,
-                onChanged: (val){
-                  setState(()=> email = val.trim());
-                }
-              ),
-              SizedBox(height: 10.0),
-              TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'Password').copyWith(labelText: 'Password'),
-                validator: (val) => val.length < 7 ? 'Enter password 6+ characters' : null,
-                obscureText: true,
-                onChanged: (val){
-                  setState(()=> password = val);
-                }
-              ),
-              SizedBox(height: 10.0),
-              RaisedButton(
-                color: Colors.green[300],
-                child: Text('Sign in', 
-                  style: TextStyle(color: Colors.white, fontSize: 18.0)
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  'assets/bg.png'
                 ),
-                onPressed: () async{
-                  if(_formKey.currentState.validate()){
-                    setState(() => loading = true);
-                    dynamic result = await _auth.signInWithEmailandPassword(email, password);
-                     if(result == null){
-                       error = 'error something is wrong';
-                       setState(() => loading = false);
-                     }
-                  }
-                }
+                fit: BoxFit.cover,
+              ),  
+            ),   
+            padding: EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Email').copyWith(labelText: 'Email'),
+                    validator: (val) => val.isEmpty ? 'Enter email' : null,
+                    onChanged: (val){
+                      setState(()=> email = val.trim());
+                    }
+                  ),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Password').copyWith(labelText: 'Password'),
+                    validator: (val) => val.length < 7 ? 'Enter password 6+ characters' : null,
+                    obscureText: true,
+                    onChanged: (val){ 
+                      setState(()=> password = val);
+                    }
+                  ),
+                  SizedBox(height: 10.0),
+                  SizedBox( 
+                    width: 300.0,
+                    height: 46.0,
+                    child: OutlineButton(
+                    borderSide: BorderSide(color: Colors.orange,width: 3),
+                    shape: RoundedRectangleBorder(side: BorderSide(
+                    color: Colors.white,
+                    style: BorderStyle.solid
+                    ), borderRadius: BorderRadius.circular(14.0)),
+                    child: Text('Sign in', 
+                      style: TextStyle(color: Colors.white, fontSize: 18.0,)
+                    ),
+                    onPressed: () async{
+                      if(_formKey.currentState.validate()){
+                        setState(() => loading = true);
+                        dynamic result = await _auth.signInWithEmailandPassword(email, password);
+                        if(result == null){
+                          error = 'error something is wrong';
+                          setState(() => loading = false);
+                        }
+                      }
+                    }
+                  ),
+                  ),
+                  
+                  
+                  FlatButton(
+                    child: Text('Register', 
+                      style: TextStyle(color: Colors.white, fontSize: 16.0)
+                    ),
+                    onPressed: () {
+                      widget.toggleView();
+                    }
+                  ),
+                  SizedBox(height: 10.0),
+                  Text(error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),  
+                  )
+                ],
               ),
-              SizedBox(height: 10.0),
-              Text(error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0),
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
+       ),
     );
   }
 }
